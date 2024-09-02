@@ -1,13 +1,37 @@
 import { IncomingMessage, ServerResponse } from "http";
 import fs from "node:fs";
 
+/**
+ * Options for configuring the Britannia logging middleware.
+ */
 export interface BritanniaOptions {
+  /**
+   * Whether to write log entries to a file.
+   * @default false
+   */
   writeToFile?: boolean;
+
+  /**
+   * The name of the file where logs will be written.
+   * If not specified, defaults to 'britannia.log'.
+   */
   fileName?: string;
+
+  /**
+   * Whether to include the request body in the log output.
+   * Note that logging the request body may have performance and security implications.
+   * @default false
+   */
   showRequestBody?: boolean;
 }
 
-export default function britannia(options?: BritanniaOptions) {
+
+/**
+ * Middleware function for logging HTTP requests.
+ * @param options - Configuration options for the logger.
+ * @returns Middleware function.
+ */
+function britannia(options?: BritanniaOptions) {
   return (req: IncomingMessage, res: ServerResponse, next: () => void) => {
     const start = process.hrtime.bigint();
     let body = '';
@@ -40,3 +64,5 @@ export default function britannia(options?: BritanniaOptions) {
     next();
   };
 }
+
+export default britannia;

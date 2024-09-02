@@ -7,16 +7,21 @@
     "target": "ESNext",
     "moduleResolution": "Node10",
     "module": "ESNext",
+    "lib": [
+      "ESNext"
+    ],
+    "moduleDetection": "force",
     "declaration": true,
     "isolatedModules": true,
-    "noEmit": true,
+    // "noEmit": true,
     "outDir": "dist",
-    "allowJs": true
+    // "allowJs": true
   },
   "include": [
     "src"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }

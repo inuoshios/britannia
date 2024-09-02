@@ -2,5 +2,4 @@
 /src
 .env
 tsconfig.json
-tsup.config.ts
 .DS_Store
