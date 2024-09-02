@@ -1,6 +1,6 @@
 {
   "name": "britannia",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A request logger middleware for your Node.js application",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
