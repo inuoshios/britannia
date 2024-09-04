@@ -1,16 +1,21 @@
 {
   "name": "britannia",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "private": false,
   "description": "A request logger middleware for your Node.js application",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "homepage": "https://github.com/inuoshios/britannia/blob/main/README.md",
   "repository": {
     "url": "https://github.com/inuoshios/britannia"
   },
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
   "scripts": {
-    "build": "npx tsc"
+    "build": "tsup"
   },
   "keywords": [
     "middleware",
@@ -28,5 +33,8 @@
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
   },
-  "type": "module"
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }

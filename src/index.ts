@@ -39,12 +39,16 @@ function britannia(options?: BritanniaOptions) {
       body += chunk.toString();
     });
 
+    req.on('end', () => {
+      // Continue with the rest of your logging logic
+      next();
+    });
 
     res.on('finish', () => {
       const end = process.hrtime.bigint();
       const duration = Number(end - start) / 1_000_000;
-      const url = `${(req.headers['x-forwarded-proto'] as string) === "https" ? "https" : "http"}://${req.headers.host}/${req.url}`;
-      let logMessage = `${req.method}\t${res.statusCode}\t${url}\t${duration.toFixed(2)}ms\t${new Date().toLocaleDateString()}`;
+      const url = `${(req.headers['x-forwarded-proto'] as string) === "https" ? "https" : "http"}://${req.headers.host}${req.url}`;
+      let logMessage = `${req.method}\t${res.statusCode}\t${url}\t${duration.toFixed(2)}ms\t${new Date().toISOString()}`;
       if (options?.showRequestBody) {
         logMessage += `\t${body}`;
       }
@@ -52,7 +56,7 @@ function britannia(options?: BritanniaOptions) {
 
       // write to the file
       if (options && options.writeToFile) {
-        fs.appendFile('britannia.log' ?? options.fileName, logMessage, { flag: 'a+' }, (err) => {
+        fs.appendFile(options.fileName ?? 'britannia.log', logMessage, { flag: 'a+' }, (err) => {
           if (err) {
             process.stderr.write(`Error while writing to file ${JSON.stringify({ reason: err.message })}\n`);
           }
@@ -61,8 +65,9 @@ function britannia(options?: BritanniaOptions) {
       process.stdout.write(logMessage);
     });
 
+
     next();
   };
 }
 
-export default britannia;
+module.exports = britannia;
