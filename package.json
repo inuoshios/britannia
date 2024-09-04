@@ -1,6 +1,6 @@
 {
   "name": "britannia",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "description": "A request logger middleware for your Node.js application",
   "main": "./dist/index.js",
@@ -9,10 +9,6 @@
   "homepage": "https://github.com/inuoshios/britannia/blob/main/README.md",
   "repository": {
     "url": "https://github.com/inuoshios/britannia"
-  },
-  "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
   },
   "scripts": {
     "build": "tsup"
